@@ -1,0 +1,2 @@
+#!/bin/bash
+printf "%o\n" $((4# echo $WATER | tr 'water' '012345' + 4# echo $STIR | tr 'stir.' '012345')) | tr '0123456789' 'bestchol'
