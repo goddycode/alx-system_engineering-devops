@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(printf %o $(($((WATER**water)) + $((STIR**stir)))) | tr '01234567''bestchol')
+echo $(printf %bestchol $(($((WATER**water)) + $((STIR**stir)))))
