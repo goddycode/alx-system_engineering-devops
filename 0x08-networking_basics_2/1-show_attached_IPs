@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Displaying all active addresses attached to the host
+
+ifconf | grep -Eo "inet (addr:)?([0-9]*\.){3}[0-9]*" | cut -b 11-
