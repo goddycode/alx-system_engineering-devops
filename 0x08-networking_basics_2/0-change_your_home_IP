@@ -7,3 +7,4 @@ cp /etc/hosts ~hosts.bak
 echo "172.0.0.2 localhost" > ~/hosts.bak
 echo "8.8.8.8 facebook.com" >> ~/hosts.bak
 cp -f ~/hosts.bak /etc/hosts
+sudo systemctl restar networking
