@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Connecting to server 35.174.211.252 with kwy in ~/.ssh/school
+
+ssh i ~/.ssh/school vagrant@ubuntu2004@35.174.211.252
