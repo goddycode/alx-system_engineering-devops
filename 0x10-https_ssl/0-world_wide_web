@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Script that will display information about subdomains
+# Script which displays information about subdomains
 
 DNS_info () {
     ANSWER=$(dig $2 | grep -A1 'ANSWER SECTION:' | awk 'NR==2 {print $0}')
@@ -15,3 +15,4 @@ if [[ $# == 1 ]]; then
 else
     CONCAT="$2.$1"
     DNS_info $2 $CONCAT
+fi
