@@ -1,0 +1,68 @@
+What happens when you type google.com in your browser and press Enter
+ 
+Have you ever wondered what occurs when you enter a website address into a browser? Although the procedure appears simple on the surface, it actually involves a complex network of activities that work together like cogs in a wheel to produce the desired search results.
+There are a number of series of complex processes which occur behind the scenes when one type a URL like "https://www.google.com" into his browser's address bar and hit Enter. In this blog post, I will dive deep into the fascinating journey of one’s browser’s request, and a series of complex processes that occur behind the scene in order to retrieve and display the requested web page. I will explore facet of concepts such as DNS, TCP/IP, HHTS/SSL, firewalls, load balancers, databases, webs servers and application servers.
+DNS Request
+Your browser automatically caches information about every domain name (DNS record) you use to access a website or other domain name.
+
+Therefore, whenever you enter a domain name like "google.com" into your web browser, the browser first checks its cache to see if it already has a recent copy of the DNS record for that domain.
+
+It will use the IP address in the cache to send a request to the server if there is a current copy of the DNS records for that domain. As a result of not having to send a request to the DNS server, the process of translating the domain name to an IP address is quicker.
+If there is a recent copy of the DNS records for that domain, it will use the IP address in the cache to send a request to the server. This speed up the process of resolving the domain name to an IP address because it avoids the need to send a request to the DNS server.
+
+If the browser cache does not contain a recent copy of the DNS record, or if the DNS record has changed since the last time it was cached, the browser will send a request to the DNS server to resolve the domain name to an IP address.
+It will utilize the IP address stored in the cache to submit a request to the server if a recent copy of the DNS records for that domain is available. Because a call to the DNS server is not necessary, the process of resolving the domain name to an IP address proceeds more quickly.
+
+The browser will submit a request to the DNS server to resolve the domain name to an IP address if the cache of the browser does not contain a current copy of the DNS record or if the DNS record has changed since it was last cached.
+
+Here's how the DNS lookup process works in more details:
+•	The local DNS resolver receives a request from the browser and is often offered by the internet service provider (ISP).
+•	To see if it has a current copy of the DNS record for the domain, the local DNS resolver looks in its cache. In that case, it relays the IP address to the browser.
+•	The local DNS resolver makes a request to a root nameserver if it does not already have a recent copy of the DNS record.
+•	The root nameserver replies with the address of a nameserver for a top-level domain (TLD), such as.com or.org
+•	A request is made to the TLD nameserver by the neighborhood DNS resolver.
+•	The address of the domain's authoritative nameserver is returned by the TLD nameserver in response.
+•	A request is made to the authoritative nameserver by the local DNS resolver.
+•	When contacted, the domain's IP address is returned by the authoritative nameserver.
+•	The IP address is sent back to the browser by the neighborhood DNS resolver.
+•	The webpage is retrieved by the browser by making a request to the server at the specified IP address.
+If the DNS record cannot be located at any of the nameservers or if it has been set up to use a service like DNS load balancing or content delivery networks (CDN), extra actions may need to be taken. The local DNS resolver and the browser both save the resolved IP address once it has been done so that subsequent requests for the same domain name can be handled more efficiently. The authoritative nameserver determines the "TTL," or Time to Live, for which the DNS record is cached, and the domain owner can configure this value.
+In other words, when you enter "https://www.google.com" in your browser, your computer doesn't truly know how to access Google's servers. The IP address for the "google.com" domain must be looked up. To accomplish this, it sends a DNS request to your ISP's DNS server, which returns the IP address of Google's server as a response.
+TCP/IP:
+TCP/IP (Transmission Control Protocol/Internet Protocol) is a set of rules that regulate how data is transmitted over the internet; it breaks down data into packets and ensures that they are sent and received in the right order. Once your computer knows the IP address of Google's server, it can establish a connection using this stack.
+Firewall:
+Your machine might need to go via a firewall before it can connect to Google's server. A firewall is a safety precaution that keeps track of and manages network traffic coming into and going out of a network. It can stop unauthorized users from accessing your network or machine.
+HTTPS/SSL:
+The HTTP protocol is used to transport data over the internet, but HTTPS (Hypertext Transfer Protocol Secure) is a secure version of it. Between your browser and Google's server, it is used to encrypt data being communicated.
+Data communicated through HTTPS is protected by the encryption algorithms TLS (Transport Layer Security) and SSL (Secure Sockets Layer).
+Your browser and Google's server must first agree on which version of SSL/TLS to use in order to establish a secure, encrypted channel for the data transmission. This process occurs when your browser connects to Google's server using HTTPS.
+To illustrate what is happening, allow me to provide an analogy.
+Internet messages are sent over HTTPS, which functions like a locked box. By placing the message in the secured box and sending it to the recipient, you can send a message over HTTPS. To read the message and open the box, you must send the key to the recipient.
+Similar to secret codes used to lock and open a box, SSL/TLS are. When delivering a message through HTTPS, the recipient and you must agree on the code that will be used to lock and unlock the box. Only you and the recipient of the message will be able to decode the message this way.
+The browser is like the sender of the message when you type "google.com" into your browser. Like the recipient of the message, the server that supports google.com. The browser uses HTTPS to transmit a request for the webpage, which is analogous to locking up the request and delivering it to the server. The webpage is then returned to the browser by the server over HTTPS, acting as if the webpage were being sent back to the browser in a locked box.
+Load-balancer
+A load balancer is a device that distributes incoming network traffic across a group of servers or resources.
+The main purpose of a load balancer is to make sure that incoming network traffic is distributed evenly among the servers in order to prevent any one server from becoming overloaded and to increase the system's overall capacity and reliability.
+To serve all of these customers, a corporation like Google, which receives billions of internet visitors each day, will need a lot of servers. In order to prevent some of the servers from being overloaded while others remain underutilized, they will need to put up a load balancer.
+The load balancer would take the inbound request from the browser and then route it to one of the servers in the Google server network in the scenario where a browser was attempting to access google.com. Depending on the load balancing technique used, a certain server will be selected.
+Web server
+When a client (such as a browser seeking to reach google.com) requests a web page, a web server is a computer program that responds to those requests. A web server receives a request for a web page from a client and processes it before sending the client the proper response.
+The load balancer will send a request to Google's server when attempting to access google.com, in other words.
+The request would then be processed by the web server, which would then produce a response. Usually, this response would contain the HTML, CSS, and JavaScript files that make up the web page.
+After that, the load balancer would transmit this response to the browser on behalf of the web server. The browser would then render the web page for the user using the HTML, CSS, and JavaScript files.
+Application server and database (if applicable)
+As opposed to the web server, the application server is responsible for managing dynamic content. The "google.com" application server is in responsible of generating the search results, which change depending on the query you enter into the search engine.
+When you send a search request to Google, the load balancer receives it first and then transmits it to one of the web servers in the Google server network. The application server then evaluates the request and produces the search results after being sent by the web server.
+The application server might need to ask a database for the required information depending on how complicated the search query is.
+The application server might need to retrieve product information from a database, for instance, if you are looking for a certain product on an e-commerce website.
+Once the application server has the required information, it returns it to the web server, which then incorporates it into the response that is delivered back to the browser. The search results are then shown to you by the browser using this data.
+
+Rendering the page
+The HTML, CSS, and JavaScript files that are part of the response that a web server sends to a browser are processed by the browser to produce the web page.
+The rendering procedure entails reading the HTML and CSS code, rendering any pictures or other media that are included on the page, and running any JavaScript code that may be there.
+In your situation, the web server would respond to your browser with the HTML, CSS, and JavaScript files that make up the Google web page.
+After rendering the page, the browser would use these files to display it to you. Usually, this procedure entails the following:
+• placing the content and graphics on the page where they belong.
+• formatting the text and design with CSS styles
+• running any JavaScript scripts that are on the page.
+You can now interact with the page by clicking links, typing text, or interacting with other components on it when it has been fully rendered.
