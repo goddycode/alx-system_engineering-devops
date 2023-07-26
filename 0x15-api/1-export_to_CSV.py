@@ -1,49 +1,43 @@
 #!/usr/bin/python3
-"""Script to export data in the CSV format"""
+"""Export data from an API to CSV format.
+"""
 import csv
 import requests
+from sys import argv
 
-def get_user_data(user_id):
-    url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
-    response = requests.get(url)
-    response.raise_for_status()  # Raise an exception if the request fails
-    return response.json()
-
-def get_user_todos(user_id):
-    url = "https://jsonplaceholder.typicode.com/todos"
-    params = {"userId": user_id}
-    response = requests.get(url, params=params)
-    response.raise_for_status()  # Raise an exception if the request fails
-    return response.json()
-
-def export_to_csv(user_id, user_data, todos):
-    filename = f"{user_id}.csv"
-    with open(filename, "w", newline="") as csvfile:
-        fieldnames = ["user_id", "username", "completed", "title"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, quoting=csv.QUOTE_MINIMAL)
-
-        writer.writeheader()
-        for todo in todos:
-            writer.writerow({
-                "user_id": user_id,
-                "username": user_data["username"],
-                "completed": todo["completed"],
-                "title": todo["title"]
-            })
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script_name.py <user_id>")
-        sys.exit(1)
-
-    user_id = sys.argv[1]
-
+if __name__ == '__main__':
+    # Checks if the argument can be converted to a number
     try:
-        user_data = get_user_data(user_id)
-        todos = get_user_todos(user_id)
-        export_to_csv(user_id, user_data, todos)
-        print(f"Data exported to {user_id}.csv successfully.")
-    except requests.RequestException as e:
-        print(f"Error: Unable to fetch data - {e}")
-        sys.exit(1)
+        emp_id = int(argv[1])
+    except ValueError:
+        exit()
 
+    # Main formatted names to API uris and filenames
+    api_url = 'https://jsonplaceholder.typicode.com'
+    user_uri = '{api}/users/{id}'.format(api=api_url, id=emp_id)
+    todo_uri = '{user_uri}/todos'.format(user_uri=user_uri)
+    filename = '{emp_id}.csv'.format(emp_id=emp_id)
+
+    # User Response
+    res = requests.get(user_uri).json()
+
+    # Username of the employee
+    username = res.get('username')
+
+    # User TODO Response
+    res = requests.get(todo_uri).json()
+
+    # Create the new file for the user to save the information
+    # Filename example: `{user_id}.csv`
+    with open(filename, 'w', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
+
+        for elem in res:
+            # Completed or non-completed task
+            status = elem.get('completed')
+
+            # The task name
+            title = elem.get('title')
+
+            # Writing each result of API response in a row of a CSV file
+            writer.writerow([emp_id, username, status, title])
