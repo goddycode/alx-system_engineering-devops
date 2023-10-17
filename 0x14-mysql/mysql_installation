@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo apt update  # For Ubuntu/Debian-based systems
+sudo apt install mysql-server-5.7  # For Ubuntu/Debian-based systems
+sudo systemctl status mysql  # For systemd-based systems
+sudo service mysql status  # For sysvinit-based systems
+mysql -u root -p
